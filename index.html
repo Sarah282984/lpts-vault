@@ -9,16 +9,32 @@
   :root {
     --mauve: #6C5763;
     --mauve-dark: #4a3a45;
-    --mauve-light: #9a7f8e;
+    --mauve-light: #7a6070;
     --cream: #FFF8F1;
     --cream-dark: #f0e4d4;
     --cream-mid: #f7ede2;
     --ink: #2a1f25;
-    --ink-soft: #4a3a3f;
+    --ink-soft: #3d2e34;
     --white: #ffffff;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── SKIP LINK ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--ink);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    z-index: 1000;
+    border-radius: 0 0 3px 3px;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
 
   body {
     background-color: var(--cream);
@@ -26,6 +42,13 @@
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 18px;
     line-height: 1.7;
+  }
+
+  /* ── FOCUS STYLES ── */
+  :focus-visible {
+    outline: 3px solid var(--mauve);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
   /* ── HEADER ── */
@@ -79,6 +102,7 @@
     gap: 0.75rem;
     justify-content: center;
     flex-wrap: wrap;
+    list-style: none;
   }
 
   .nav-pills a {
@@ -92,6 +116,7 @@
     border-radius: 2px;
     letter-spacing: 0.03em;
     transition: background 0.2s, border-color 0.2s;
+    display: inline-block;
   }
 
   .nav-pills a:hover {
@@ -170,7 +195,7 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--mauve);
+    color: var(--mauve-dark);
     border-bottom: 1px solid var(--cream-dark);
     padding-bottom: 0.5rem;
     margin-bottom: 1.25rem;
@@ -196,9 +221,7 @@
     text-align: center;
   }
 
-  .item-body {
-    flex: 1;
-  }
+  .item-body { flex: 1; }
 
   .item-title {
     font-family: 'Lora', serif;
@@ -238,7 +261,7 @@
     align-items: center;
   }
 
-  /* ── DOWNLOAD / PLAY BUTTONS ── */
+  /* ── BUTTONS ── */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -256,57 +279,37 @@
 
   .btn-pdf {
     background: var(--cream-dark);
-    border-color: rgba(108,87,99,0.25);
+    border-color: rgba(108,87,99,0.35);
     color: var(--mauve-dark);
   }
-
-  .btn-pdf:hover {
-    background: var(--mauve);
-    border-color: var(--mauve);
-    color: var(--white);
-  }
+  .btn-pdf:hover { background: var(--mauve); border-color: var(--mauve); color: var(--white); }
 
   .btn-epub {
     background: var(--white);
-    border-color: rgba(108,87,99,0.25);
+    border-color: rgba(108,87,99,0.35);
     color: var(--mauve-dark);
   }
-
-  .btn-epub:hover {
-    background: var(--mauve-light);
-    border-color: var(--mauve-light);
-    color: var(--white);
-  }
+  .btn-epub:hover { background: var(--mauve-light); border-color: var(--mauve-light); color: var(--white); }
 
   .btn-play {
     background: var(--mauve);
     border-color: var(--mauve);
     color: var(--white);
   }
-
-  .btn-play:hover {
-    background: var(--mauve-dark);
-    border-color: var(--mauve-dark);
-  }
+  .btn-play:hover { background: var(--mauve-dark); border-color: var(--mauve-dark); }
 
   .btn-coming {
     background: var(--cream-dark);
     border-color: rgba(108,87,99,0.15);
-    color: var(--mauve-light);
+    color: var(--ink-soft);
     font-style: italic;
     cursor: default;
     pointer-events: none;
   }
 
-  /* ── NESTED ITEMS (worksheets inside a book) ── */
-  .nested-items {
-    margin-left: 2.5rem;
-  }
-
-  .nested-items .item {
-    background: var(--cream-mid);
-    border-color: rgba(108,87,99,0.08);
-  }
+  /* ── NESTED ITEMS ── */
+  .nested-items { margin-left: 2.5rem; }
+  .nested-items .item { background: var(--cream-mid); border-color: rgba(108,87,99,0.08); }
 
   /* ── DIVIDER ── */
   .ornamental-divider {
@@ -315,10 +318,10 @@
     font-size: 1rem;
     letter-spacing: 0.5em;
     margin: 3rem 0 0;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
-  /* ── BROWSE BY TOPIC ── */
+  /* ── TOPIC GRID ── */
   .topic-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -343,49 +346,24 @@
     border-bottom: 1px solid var(--cream-dark);
   }
 
-  .topic-card ul {
-    list-style: none;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-  }
+  .topic-card ul { list-style: none; font-size: 0.9rem; color: var(--ink-soft); }
+  .topic-card ul li { padding: 0.2rem 0; }
+  .topic-card ul li::before { content: '→ '; color: var(--mauve-light); font-size: 0.8rem; }
 
-  .topic-card ul li {
-    padding: 0.2rem 0;
-  }
-
-  .topic-card ul li::before {
-    content: '→ ';
-    color: var(--mauve-light);
-    font-size: 0.8rem;
-  }
-
-  .topic-card a {
-    color: var(--mauve-dark);
-    text-decoration: none;
-    font-style: italic;
-  }
-
-  .topic-card a:hover {
-    color: var(--mauve);
-    text-decoration: underline;
-  }
+  .topic-card a { color: var(--mauve-dark); text-decoration: none; font-style: italic; }
+  .topic-card a:hover { color: var(--mauve); text-decoration: underline; }
 
   /* ── FOOTER ── */
   footer {
     background: var(--mauve-dark);
-    color: rgba(255,248,241,0.7);
+    color: rgba(255,248,241,0.85);
     text-align: center;
     padding: 2rem;
     font-size: 0.88rem;
     font-style: italic;
   }
-
-  footer a {
-    color: rgba(255,248,241,0.9);
-    text-decoration: none;
-  }
-
-  footer a:hover { text-decoration: underline; }
+  footer a { color: rgba(255,248,241,0.95); text-decoration: underline; }
+  footer a:hover { opacity: 0.8; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
@@ -393,299 +371,294 @@
     .item { padding: 0.9rem 1rem; }
     .topic-grid { grid-template-columns: 1fr; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════ HEADER ══════════════════ -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <header>
-  <p class="header-ornament">✦ &nbsp; your bundle &nbsp; ✦</p>
+  <p class="header-ornament" aria-hidden="true">✦ &nbsp; your bundle &nbsp; ✦</p>
   <h1>The Map of the Realm</h1>
   <p class="subtitle">Everything in your Learn Physics Through Stories bundle, organized so you know exactly where to begin.</p>
-  <nav class="nav-pills">
-    <a href="#guided-path">The Guided Path</a>
-    <a href="#by-topic">Browse by Topic</a>
+  <nav aria-label="Page sections">
+    <ul class="nav-pills">
+      <li><a href="#guided-path">The Guided Path</a></li>
+      <li><a href="#by-topic">Browse by Topic</a></li>
+    </ul>
   </nav>
 </header>
 
-<!-- ══════════════════ WELCOME ══════════════════ -->
 <div class="welcome-band">
-  <span class="ornament">❧</span>
+  <span class="ornament" aria-hidden="true">❧</span>
   <p>Follow the guided path from beginning to end, or jump straight to the topic you're teaching. New content is added here as it's created — no need to repurchase.</p>
 </div>
 
-<!-- ══════════════════ MAIN ══════════════════ -->
-<main>
+<main id="main-content">
 
-  <!-- ── GUIDED PATH ── -->
   <h2 class="section-title" id="guided-path">The Guided Path</h2>
   <p class="section-desc">Each section builds naturally on the last. Start here if you're new to the series.</p>
 
-
   <!-- FORCES & MECHANICS -->
-  <div class="topic-group" id="forces">
-    <p class="topic-label">✦ &nbsp; Forces &amp; Mechanics</p>
+  <section class="topic-group" id="forces" aria-labelledby="label-forces">
+    <h3 class="topic-label" id="label-forces"><span aria-hidden="true">✦ &nbsp;</span>Forces &amp; Mechanics</h3>
 
     <div class="item">
-      <div class="item-icon">📖</div>
+      <span class="item-icon" aria-hidden="true">📖</span>
       <div class="item-body">
-        <div class="item-title">Newton's Laws: A Fairy Tale <span class="badge">Start Here</span></div>
-        <div class="item-desc">The best place to begin. Introduces forces, motion, and Newton's three laws through story.</div>
+        <p class="item-title">Newton's Laws: A Fairy Tale <span class="badge">Start Here</span></p>
+        <p class="item-desc">The best place to begin. Introduces forces, motion, and Newton's three laws through story.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Books/Newton%27s%20Laws%20Second%20Edition%20Paperback.pdf" download>⬇ PDF</a>
-          <a class="btn btn-epub" href="Books/Newtons-Laws-A-Fairy-Tale-Kindle%20(1).epub" download>⬇ epub</a>
+          <a class="btn btn-pdf" href="Books/Newton%27s%20Laws%20Second%20Edition%20Paperback.pdf" download aria-label="Download Newton's Laws: A Fairy Tale as PDF">⬇ PDF</a>
+          <a class="btn btn-epub" href="Books/Newtons-Laws-A-Fairy-Tale-Kindle%20(1).epub" download aria-label="Download Newton's Laws: A Fairy Tale as epub">⬇ epub</a>
         </div>
       </div>
     </div>
 
     <div class="nested-items">
       <div class="item">
-        <div class="item-icon">📄</div>
+        <span class="item-icon" aria-hidden="true">📄</span>
         <div class="item-body">
-          <div class="item-title">Free Body Diagrams Worksheet</div>
-          <div class="item-desc">Practice drawing and interpreting free body diagrams. Includes answers.</div>
+          <p class="item-title">Free Body Diagrams Worksheet</p>
+          <p class="item-desc">Practice drawing and interpreting free body diagrams. Includes answers.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Worksheets/Free%20Body%20Diagrams%20Worksheet%20%2B%20Answers%20(Qualitative).pdf" download>⬇ PDF</a>
+            <a class="btn btn-pdf" href="Worksheets/Free%20Body%20Diagrams%20Worksheet%20%2B%20Answers%20(Qualitative).pdf" download aria-label="Download Free Body Diagrams Worksheet as PDF">⬇ PDF</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="item">
-      <div class="item-icon">📖</div>
+      <span class="item-icon" aria-hidden="true">📖</span>
       <div class="item-body">
-        <div class="item-title">Allora and the Puzzles of Archimedes</div>
-        <div class="item-desc">Levers, pulleys, and friction — told as a fantasy adventure.</div>
+        <p class="item-title">Allora and the Puzzles of Archimedes</p>
+        <p class="item-desc">Levers, pulleys, and friction — told as a fantasy adventure.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Books/Allora%20and%20the%20Puzzles%20of%20Archimedes%20Paperback%204.pdf" download>⬇ PDF</a>
-          <a class="btn btn-epub" href="Books/Allora-and-the-Puzzles-of-Archimedes-Kindle%20(4).epub" download>⬇ epub</a>
+          <a class="btn btn-pdf" href="Books/Allora%20and%20the%20Puzzles%20of%20Archimedes%20Paperback%204.pdf" download aria-label="Download Allora and the Puzzles of Archimedes as PDF">⬇ PDF</a>
+          <a class="btn btn-epub" href="Books/Allora-and-the-Puzzles-of-Archimedes-Kindle%20(4).epub" download aria-label="Download Allora and the Puzzles of Archimedes as epub">⬇ epub</a>
         </div>
       </div>
     </div>
 
     <div class="nested-items">
       <div class="item">
-        <div class="item-icon">🎮</div>
+        <span class="item-icon" aria-hidden="true">🎮</span>
         <div class="item-body">
-          <div class="item-title">Friction Explorer</div>
-          <div class="item-desc">Interactive simulation — best used after Chapter 3 of Allora. Play in your browser.</div>
+          <p class="item-title">Friction Explorer</p>
+          <p class="item-desc">Interactive simulation — best used after Chapter 3 of Allora. Play in your browser.</p>
           <div class="item-links">
-            <a class="btn btn-play" href="https://mathwithsarah.com/frictionexplorer" target="_blank">▶ Play in Browser</a>
+            <a class="btn btn-play" href="https://mathwithsarah.com/frictionexplorer" target="_blank" rel="noopener noreferrer" aria-label="Play Friction Explorer in browser, opens in new tab">▶ Play in Browser</a>
           </div>
         </div>
       </div>
       <div class="item">
-        <div class="item-icon">📄</div>
+        <span class="item-icon" aria-hidden="true">📄</span>
         <div class="item-body">
-          <div class="item-title">Friction Explorer Worksheet</div>
-          <div class="item-desc">Use alongside the simulation above.</div>
+          <p class="item-title">Friction Explorer Worksheet</p>
+          <p class="item-desc">Use alongside the simulation above.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Worksheets/Friction%20Explorer%20Worksheet.pdf" download>⬇ Worksheet</a>
-            <a class="btn btn-epub" href="Worksheets/%5BKey%5D%20Friction%20Explorer%20Worksheet.pdf" download>⬇ Answer Key</a>
+            <a class="btn btn-pdf" href="Worksheets/Friction%20Explorer%20Worksheet.pdf" download aria-label="Download Friction Explorer Worksheet as PDF">⬇ Worksheet</a>
+            <a class="btn btn-epub" href="Worksheets/%5BKey%5D%20Friction%20Explorer%20Worksheet.pdf" download aria-label="Download Friction Explorer Answer Key as PDF">⬇ Answer Key</a>
           </div>
         </div>
       </div>
       <div class="item">
-        <div class="item-icon">📄</div>
+        <span class="item-icon" aria-hidden="true">📄</span>
         <div class="item-body">
-          <div class="item-title">Calculating Friction Worksheet</div>
-          <div class="item-desc">Goes deeper into friction calculations. Optional — best for older students.</div>
+          <p class="item-title">Calculating Friction Worksheet</p>
+          <p class="item-desc">Goes deeper into friction calculations. Optional — best for older students.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Worksheets/Calculating_Friction_Worksheet.pdf" download>⬇ Worksheet</a>
-            <a class="btn btn-epub" href="Worksheets/Calculating_Friction_Answer_Key.pdf" download>⬇ Answer Key</a>
+            <a class="btn btn-pdf" href="Worksheets/Calculating_Friction_Worksheet.pdf" download aria-label="Download Calculating Friction Worksheet as PDF">⬇ Worksheet</a>
+            <a class="btn btn-epub" href="Worksheets/Calculating_Friction_Answer_Key.pdf" download aria-label="Download Calculating Friction Answer Key as PDF">⬇ Answer Key</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- GRAVITY & SPACE -->
-  <div class="topic-group" id="gravity">
-    <p class="topic-label">✦ &nbsp; Gravity &amp; Space</p>
+  <section class="topic-group" id="gravity" aria-labelledby="label-gravity">
+    <h3 class="topic-label" id="label-gravity"><span aria-hidden="true">✦ &nbsp;</span>Gravity &amp; Space</h3>
 
     <div class="item">
-      <div class="item-icon">📖</div>
+      <span class="item-icon" aria-hidden="true">📖</span>
       <div class="item-body">
-        <div class="item-title">Gravity: A Fairy Tale</div>
-        <div class="item-desc">Gravity, orbits, and falling objects — through a story that pulls you in.</div>
+        <p class="item-title">Gravity: A Fairy Tale</p>
+        <p class="item-desc">Gravity, orbits, and falling objects — through a story that pulls you in.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Books/Gravity%20Fairy%20Tale%20Paperback.pdf" download>⬇ PDF</a>
-          <a class="btn btn-epub" href="Books/Gravity-A-Fairy-Tale-Kindle.epub" download>⬇ epub</a>
+          <a class="btn btn-pdf" href="Books/Gravity%20Fairy%20Tale%20Paperback.pdf" download aria-label="Download Gravity: A Fairy Tale as PDF">⬇ PDF</a>
+          <a class="btn btn-epub" href="Books/Gravity-A-Fairy-Tale-Kindle.epub" download aria-label="Download Gravity: A Fairy Tale as epub">⬇ epub</a>
         </div>
       </div>
     </div>
 
     <div class="nested-items">
       <div class="item">
-        <div class="item-icon">✨</div>
+        <span class="item-icon" aria-hidden="true">✨</span>
         <div class="item-body">
-          <div class="item-title">Abigail's Totally Purposeful, Definitely Not Accidental or Dangerous Adventure</div>
-          <div class="item-desc">Bonus story — a companion chapter to Gravity, featuring pendulums and a very determined heroine.</div>
+          <p class="item-title">Abigail's Totally Purposeful, Definitely Not Accidental or Dangerous Adventure</p>
+          <p class="item-desc">Bonus story — a companion chapter to Gravity, featuring pendulums and a very determined heroine.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Bonus%20Stories/Abigails-Totally-Purposeful-Definitely-Not-Accidental-or-Dangerous-Adventure-Print%20(2).pdf" download>⬇ PDF</a>
-            <a class="btn btn-epub" href="Bonus%20Stories/Abigails-Totally-Purposeful-Definitely-Not-Accidental-or-Dangerous-Adventure-Kindle%20(2).epub" download>⬇ epub</a>
+            <a class="btn btn-pdf" href="Bonus%20Stories/Abigails-Totally-Purposeful-Definitely-Not-Accidental-or-Dangerous-Adventure-Print%20(2).pdf" download aria-label="Download Abigail's Adventure as PDF">⬇ PDF</a>
+            <a class="btn btn-epub" href="Bonus%20Stories/Abigails-Totally-Purposeful-Definitely-Not-Accidental-or-Dangerous-Adventure-Kindle%20(2).epub" download aria-label="Download Abigail's Adventure as epub">⬇ epub</a>
           </div>
         </div>
       </div>
 
       <div class="item">
-        <div class="item-icon">✨</div>
+        <span class="item-icon" aria-hidden="true">✨</span>
         <div class="item-body">
-          <div class="item-title">Starlight Starship Adventure Workbook</div>
-          <div class="item-desc">Bonus story + workbook — 3D shapes and the inverse square law. An interstellar voyage.</div>
+          <p class="item-title">Starlight Starship Adventure Workbook</p>
+          <p class="item-desc">Bonus story and workbook — 3D shapes and the inverse square law. An interstellar voyage.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Bonus%20Stories/Full%20Starlight%20Starship%20Adventure%20Workbook%20%2B%20Story.pdf" download>⬇ PDF</a>
+            <a class="btn btn-pdf" href="Bonus%20Stories/Full%20Starlight%20Starship%20Adventure%20Workbook%20%2B%20Story.pdf" download aria-label="Download Starlight Starship Adventure Workbook as PDF">⬇ PDF</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- MATH INTERLUDE -->
-  <div class="topic-group" id="math-interlude">
-    <p class="topic-label">✦ &nbsp; Math Interlude</p>
+  <section class="topic-group" id="math-interlude" aria-labelledby="label-math">
+    <h3 class="topic-label" id="label-math"><span aria-hidden="true">✦ &nbsp;</span>Math Interlude</h3>
 
     <div class="item">
-      <div class="item-icon">🎮</div>
+      <span class="item-icon" aria-hidden="true">🎮</span>
       <div class="item-body">
-        <div class="item-title">Scientific Notation Quest</div>
-        <div class="item-desc">An interactive browser game for practicing scientific notation. A good pause between the physics chapters.</div>
+        <p class="item-title">Scientific Notation Quest</p>
+        <p class="item-desc">An interactive browser game for practicing scientific notation. A good pause between the physics chapters.</p>
         <div class="item-links">
-          <a class="btn btn-play" href="https://mathwithsarah.com/scientificnotation" target="_blank">▶ Play in Browser</a>
+          <a class="btn btn-play" href="https://mathwithsarah.com/scientificnotation" target="_blank" rel="noopener noreferrer" aria-label="Play Scientific Notation Quest in browser, opens in new tab">▶ Play in Browser</a>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- LIGHT & OPTICS -->
-  <div class="topic-group" id="light">
-    <p class="topic-label">✦ &nbsp; Light &amp; Optics</p>
+  <section class="topic-group" id="light" aria-labelledby="label-light">
+    <h3 class="topic-label" id="label-light"><span aria-hidden="true">✦ &nbsp;</span>Light &amp; Optics</h3>
 
     <div class="item">
-      <div class="item-icon">📖</div>
+      <span class="item-icon" aria-hidden="true">📖</span>
       <div class="item-body">
-        <div class="item-title">Light: A Fairy Tale</div>
-        <div class="item-desc">The nature of light, reflection, refraction, and color — told as an illuminating story.</div>
+        <p class="item-title">Light: A Fairy Tale</p>
+        <p class="item-desc">The nature of light, reflection, refraction, and color — told as an illuminating story.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Books/Light%20Fairy%20Tale%20Paperback.pdf" download>⬇ PDF</a>
-          <a class="btn btn-epub" href="Books/Light-A-Fairy-Tale-Kindle.epub" download>⬇ epub</a>
+          <a class="btn btn-pdf" href="Books/Light%20Fairy%20Tale%20Paperback.pdf" download aria-label="Download Light: A Fairy Tale as PDF">⬇ PDF</a>
+          <a class="btn btn-epub" href="Books/Light-A-Fairy-Tale-Kindle.epub" download aria-label="Download Light: A Fairy Tale as epub">⬇ epub</a>
         </div>
       </div>
     </div>
 
     <div class="nested-items">
       <div class="item">
-        <div class="item-icon">🎮</div>
+        <span class="item-icon" aria-hidden="true">🎮</span>
         <div class="item-body">
-          <div class="item-title">The Case of the Seven Reflections</div>
-          <div class="item-desc">Fairy detective optics mystery game — a beautiful companion to Light: A Fairy Tale.</div>
+          <p class="item-title">The Case of the Seven Reflections</p>
+          <p class="item-desc">Fairy detective optics mystery game — a beautiful companion to Light: A Fairy Tale.</p>
           <div class="item-links">
-            <span class="btn btn-coming">Coming Soon</span>
+            <span class="btn btn-coming" aria-label="The Case of the Seven Reflections — coming soon">Coming Soon</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- ELECTRICITY -->
-  <div class="topic-group" id="electricity">
-    <p class="topic-label">✦ &nbsp; Electricity</p>
+  <section class="topic-group" id="electricity" aria-labelledby="label-electricity">
+    <h3 class="topic-label" id="label-electricity"><span aria-hidden="true">✦ &nbsp;</span>Electricity</h3>
 
     <div class="item">
-      <div class="item-icon">🎮</div>
+      <span class="item-icon" aria-hidden="true">🎮</span>
       <div class="item-body">
-        <div class="item-title">The Sorceress of Circuits</div>
-        <div class="item-desc">An interactive electricity game — circuits, current, and voltage through story. Play in your browser.</div>
+        <p class="item-title">The Sorceress of Circuits</p>
+        <p class="item-desc">An interactive electricity game — circuits, current, and voltage through story. Play in your browser.</p>
         <div class="item-links">
-          <a class="btn btn-play" href="https://mathwithsarah.com/sorceress" target="_blank">▶ Play in Browser</a>
+          <a class="btn btn-play" href="https://mathwithsarah.com/sorceress" target="_blank" rel="noopener noreferrer" aria-label="Play The Sorceress of Circuits in browser, opens in new tab">▶ Play in Browser</a>
         </div>
       </div>
     </div>
 
     <div class="nested-items">
       <div class="item">
-        <div class="item-icon">✨</div>
+        <span class="item-icon" aria-hidden="true">✨</span>
         <div class="item-body">
-          <div class="item-title">Gerald and the Many Unsettling Details</div>
-          <div class="item-desc">Bonus story — a short, darkly funny tale about the photoelectric effect.</div>
+          <p class="item-title">Gerald and the Many Unsettling Details</p>
+          <p class="item-desc">Bonus story — a short, darkly funny tale about the photoelectric effect.</p>
           <div class="item-links">
-            <a class="btn btn-pdf" href="Bonus%20Stories/BONUS%20STORY%20Gerald%20and%20the%20Many%20Unsettling%20Details.pdf" download>⬇ PDF</a>
+            <a class="btn btn-pdf" href="Bonus%20Stories/BONUS%20STORY%20Gerald%20and%20the%20Many%20Unsettling%20Details.pdf" download aria-label="Download Gerald and the Many Unsettling Details as PDF">⬇ PDF</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- PHYSICS FABLES -->
-  <div class="topic-group" id="fables">
-    <p class="topic-label">✦ &nbsp; Physics Fables</p>
+  <section class="topic-group" id="fables" aria-labelledby="label-fables">
+    <h3 class="topic-label" id="label-fables"><span aria-hidden="true">✦ &nbsp;</span>Physics Fables</h3>
 
     <div class="item">
-      <div class="item-icon">📖</div>
+      <span class="item-icon" aria-hidden="true">📖</span>
       <div class="item-body">
-        <div class="item-title">Physics Fables</div>
-        <div class="item-desc">A collection of short physics fables — each one a single concept, beautifully told. Includes stories on density, special relativity, magnetism, coordinate systems, and more. Lovely for younger readers or as a gentle landing at the end of the series.</div>
+        <p class="item-title">Physics Fables</p>
+        <p class="item-desc">A collection of short physics fables — each one a single concept, beautifully told. Includes stories on density, special relativity, magnetism, coordinate systems, and more. Lovely for younger readers or as a gentle landing at the end of the series.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Books/Physics%20Fables%20Paperback%20v5.pdf" download>⬇ PDF</a>
-          <a class="btn btn-epub" href="Books/Physics-Fables-Kindle.epub" download>⬇ epub</a>
+          <a class="btn btn-pdf" href="Books/Physics%20Fables%20Paperback%20v5.pdf" download aria-label="Download Physics Fables as PDF">⬇ PDF</a>
+          <a class="btn btn-epub" href="Books/Physics-Fables-Kindle.epub" download aria-label="Download Physics Fables as epub">⬇ epub</a>
         </div>
       </div>
     </div>
-  </div>
-
+  </section>
 
   <!-- ADDITIONAL WORKSHEETS -->
-  <div class="topic-group" id="worksheets">
-    <p class="topic-label">✦ &nbsp; Additional Practice Worksheets</p>
+  <section class="topic-group" id="worksheets" aria-labelledby="label-worksheets">
+    <h3 class="topic-label" id="label-worksheets"><span aria-hidden="true">✦ &nbsp;</span>Additional Practice Worksheets</h3>
 
     <div class="item">
-      <div class="item-icon">📄</div>
+      <span class="item-icon" aria-hidden="true">📄</span>
       <div class="item-body">
-        <div class="item-title">Energy Worksheet</div>
-        <div class="item-desc">Classic energy problems wrapped in a story. Includes answers.</div>
+        <p class="item-title">Energy Worksheet</p>
+        <p class="item-desc">Classic energy problems wrapped in a story. Includes answers.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Worksheets/Energy%20Worksheet%20%2B%20Answers%20(A%20Physics%20Story)%20(2).pdf" download>⬇ PDF</a>
+          <a class="btn btn-pdf" href="Worksheets/Energy%20Worksheet%20%2B%20Answers%20(A%20Physics%20Story)%20(2).pdf" download aria-label="Download Energy Worksheet as PDF">⬇ PDF</a>
         </div>
       </div>
     </div>
 
     <div class="item">
-      <div class="item-icon">📄</div>
+      <span class="item-icon" aria-hidden="true">📄</span>
       <div class="item-body">
-        <div class="item-title">Momentum Worksheet</div>
-        <div class="item-desc">Momentum and impulse problems told as a physics story. Includes answers.</div>
+        <p class="item-title">Momentum Worksheet</p>
+        <p class="item-desc">Momentum and impulse problems told as a physics story. Includes answers.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Worksheets/Momentum%20Worksheet%20%2B%20Answers%20(A%20Physics%20Story).pdf" download>⬇ PDF</a>
+          <a class="btn btn-pdf" href="Worksheets/Momentum%20Worksheet%20%2B%20Answers%20(A%20Physics%20Story).pdf" download aria-label="Download Momentum Worksheet as PDF">⬇ PDF</a>
         </div>
       </div>
     </div>
 
     <div class="item">
-      <div class="item-icon">📄</div>
+      <span class="item-icon" aria-hidden="true">📄</span>
       <div class="item-body">
-        <div class="item-title">Kinematics Worksheet</div>
-        <div class="item-desc">1D kinematics problems in a story-based format. Includes solutions.</div>
+        <p class="item-title">Kinematics Worksheet</p>
+        <p class="item-desc">1D kinematics problems in a story-based format. Includes solutions.</p>
         <div class="item-links">
-          <a class="btn btn-pdf" href="Worksheets/%5BSolutions%5D%20Kinematics%20Worksheet%20%2B%20Answers%20(Story-based).pdf" download>⬇ PDF</a>
+          <a class="btn btn-pdf" href="Worksheets/%5BSolutions%5D%20Kinematics%20Worksheet%20%2B%20Answers%20(Story-based).pdf" download aria-label="Download Kinematics Worksheet as PDF">⬇ PDF</a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-
-  <!-- ── BROWSE BY TOPIC ── -->
-  <div class="ornamental-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <!-- BROWSE BY TOPIC -->
+  <div class="ornamental-divider" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
 
   <h2 class="section-title" id="by-topic">Browse by Topic</h2>
   <p class="section-desc">Teaching a specific unit? Jump straight to what you need.</p>
 
   <div class="topic-grid">
-
     <div class="topic-card">
       <h3>Forces &amp; Mechanics</h3>
       <ul>
@@ -758,14 +731,12 @@
         <li><a href="#electricity">Gerald and the Many Unsettling Details</a></li>
       </ul>
     </div>
-
   </div>
 
 </main>
 
-<!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Made with care by <a href="https://mathwithsarah.com">Math with Sarah</a> &nbsp;✦&nbsp; New content is added here as the series grows.</p>
+  <p>Made with care by <a href="https://mathwithsarah.com">Math with Sarah</a><span aria-hidden="true"> &nbsp;✦&nbsp; </span>New content is added here as the series grows.</p>
 </footer>
 
 </body>
